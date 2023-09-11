@@ -2,9 +2,11 @@ import { FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
-import { isLoading, urlBookId, state } from 'redux/selectors';
-import { getBooks, getIdBook } from 'redux/reducer';
 import { Button } from 'components/button';
+import { getBooks, getIdBook } from 'store/reducer';
+import { isLoading, urlBookId } from 'store/selectors';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
 import Item, { IVolumeInfo } from './item';
 import * as S from './index.styles';
 
@@ -25,13 +27,15 @@ export interface IPropertiesMap {
 }
 
 const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
-  const [stateArray, setStateArray] = useState<IPropsItems[]>([]);
-  const [filteredArray, setFilteredArray] = useState<IPropsItems[]>([]);
+  const [stateArray, setStateArray] = useState<any>([]);
+  const [filteredArray, setFilteredArray] = useState<any>([]);
   const [visible, setVisible] = useState<number>(30);
-  const dispatch = useDispatch();
-  const dataFromState = useSelector(state);
-  const loading = useSelector(isLoading);
-  const id = useSelector(urlBookId);
+  const dispatch = useAppDispatch();
+  const dataFromState = useAppSelector(state => state.books.books.items);
+  const loading = useAppSelector(isLoading);
+  console.log(loading)
+  const id = useAppSelector(urlBookId);
+
   const showMoreItems = () => {
     setVisible(prevValue => prevValue + 30);
   };
@@ -59,7 +63,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
     });
   };
   const handleIdBook = (id: number): void => {
-    dispatch(getIdBook(id));
+    console.log('id', id)
+   dispatch(selectSearchingBook(id));
   };
 
   return (
@@ -95,7 +100,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
               </Link>
             ))}
           </S.Content>
-          {filteredArray.length > 30 && dataFromState.length > visible ? (
+          {filteredArray.length > 30 && dataFromState?.books?.books.length > visible ? (
             <Button onClick={showMoreItems} buttonName={'Show more'} />
           ) : null}
         </>

@@ -1,16 +1,23 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import AppRouter from 'AppRouter';
+import { useAppDispatch } from 'hooks';
+import { getSearchingBooks } from 'store/reducer/getSearchBooks';
 import * as S from '../src/App.styles';
 
 const App: FC = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getSearchingBooks('iron-man'));
+  }, []);
 
   return (
-		<HashRouter>
-			<S.Container>
-			<AppRouter/>
-			</S.Container>
-		</HashRouter>
+    <HashRouter>
+      <S.Container>
+        <AppRouter />
+      </S.Container>
+    </HashRouter>
   );
 };
 

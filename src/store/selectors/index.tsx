@@ -1,0 +1,14 @@
+
+
+export const urlBookId = (state: any) => state.books.id;
+
+export const isLoading = (state: any) => state.books?.loading;
+
+export const state = (state: any) =>
+  state.books.books.data?.items;
+
+export const bookData = (state: any) =>
+  state.books?.book?.data?.volumeInfo ?? [];
+
+export const imageLinks = (state: any) =>
+  state.books.book?.data?.volumeInfo?.imageLinks?.smallThumbnail ?? '';

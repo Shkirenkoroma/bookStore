@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
-import { isLoading, bookData, imageLinks } from 'redux/selectors';
 import { Button } from 'components/button';
+import { bookData, imageLinks, isLoading } from 'store/selectors';
 import * as S from './index.styles';
 
 const DescriptionPage = () => {
