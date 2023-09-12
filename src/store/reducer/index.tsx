@@ -25,34 +25,9 @@ const initialState: IState = {
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    getBooks: (state, action: PayloadAction<any>) => {
-      state.loading = true;
-      state.searchParams = action.payload;
-    },
-    setBooks: (state, action: PayloadAction<any>) => {
-      state.books = action.payload;
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-    },
-    getSortingBooks: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.queryParams = action.payload;
-    },
-    getIdBook: (state, action: PayloadAction<number>) => {
-      state.id = action.payload;
-    },
-    setBook: (state, action: PayloadAction<any>) => {
-      state.book = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [getSearchingBooks.fulfilled.type]: (state, action: PayloadAction<any>) => {
-      console.log('dad', action.payload)
       state.loading = false;
       state.error = '';
       state.books = action.payload;
@@ -65,7 +40,6 @@ export const booksSlice = createSlice({
       state.error = action.payload;
     },
     [selectSearchingBook.fulfilled.type]: (state, action: PayloadAction<any>) => {
-      console.log('dad', action.payload)
       state.loading = false;
       state.error = '';
       state.book = action.payload;
@@ -77,17 +51,8 @@ export const booksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    
   },
 });
 
 export const booksReducer = booksSlice.reducer;
-export const {
-  setLoading,
-  getBooks,
-  setBooks,
-  setBook,
-  setError,
-  getSortingBooks,
-  getIdBook,
-} = booksSlice.actions;
+

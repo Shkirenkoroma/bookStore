@@ -1,16 +1,16 @@
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
+import { useAppSelector } from 'hooks';
 import { bookData, imageLinks, isLoading } from 'store/selectors';
 import * as S from './index.styles';
 
 const DescriptionPage = () => {
-  const loading = useSelector(isLoading);
+  const loading = useAppSelector(isLoading);
   const {
     title, categories, authors, description,
-  } = useSelector(bookData);
-  const label = useSelector(imageLinks);
+  } = useAppSelector(bookData);
+  const label = useAppSelector(imageLinks);
   const navigate = useNavigate();
 
   const goBack = () => {

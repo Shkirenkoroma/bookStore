@@ -14,7 +14,7 @@ interface IResponseData {
 }
 
 export const selectSearchingBook = createAsyncThunk<IResponseData, number>(
-  'user/fetchAll',
+  'user/fetchByID',
   async (id) => {
     const response = await axios.get(
       `https://www.googleapis.com/books/v1/volumes/${id}`,

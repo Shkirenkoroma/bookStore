@@ -1,9 +1,7 @@
 import { FC, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
-import { getBooks, getIdBook } from 'store/reducer';
 import { isLoading, urlBookId } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
@@ -33,7 +31,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const dispatch = useAppDispatch();
   const dataFromState = useAppSelector(state => state.books.books.items);
   const loading = useAppSelector(isLoading);
-  console.log(loading)
+  console.log('filteredArray', filteredArray);
+  console.log('dataFromState', dataFromState);
   const id = useAppSelector(urlBookId);
 
   const showMoreItems = () => {
@@ -46,7 +45,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   }, [dataFromState]);
 
   useEffect(() => {
-    dispatch(getBooks(id));
+    console.log('oops')
+    //dispatch((selectSearchingBook(id)));
   }, [id]);
 
   useEffect(() => {
@@ -58,13 +58,15 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const sortingFunction = () => {
     return stateArray?.filter((element: IPropertiesMap) => {
       const sortingElement = element.volumeInfo.categories?.[0];
+      console.log('saf', sortingElement)
       const isHasMatches = sortingElement?.includes(sortingField);
       return isHasMatches;
     });
   };
+
   const handleIdBook = (id: number): void => {
-    console.log('id', id)
-   dispatch(selectSearchingBook(id));
+    console.log('id in function', id);
+    dispatch(selectSearchingBook(id));
   };
 
   return (
@@ -80,18 +82,14 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
           glassColor="#c0efff"
           color="#bb7d81"
         />
-      ) : filteredArray ? (
+      ) : (
         <>
-          {filteredArray.length > 0 ? (
-            <>
-              <S.Text>
-                Found<S.Counter>{filteredArray.length}</S.Counter>
-                <S.Text>books</S.Text>
-              </S.Text>
-            </>
-          ) : null}
+          <S.Text>
+            Found<S.Counter>{filteredArray.length}</S.Counter>
+            <S.Text>books</S.Text>
+          </S.Text>
           <S.Content>
-            {filteredArray.slice(0, visible).map((element: IPropsItems) => (
+            {filteredArray?.slice(0, visible).map((element: IPropsItems) => (
               <Link to={`${element.id}`} key={element.id}>
                 <Item
                   state={element}
@@ -100,11 +98,10 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
               </Link>
             ))}
           </S.Content>
-          {filteredArray.length > 30 && dataFromState?.books?.books.length > visible ? (
-            <Button onClick={showMoreItems} buttonName={'Show more'} />
-          ) : null}
+          {!!filteredArray?.length && <Button onClick={showMoreItems} buttonName={'Show more'} />}
+         
         </>
-      ) : null}
+      )}
     </S.Container>
   );
 };

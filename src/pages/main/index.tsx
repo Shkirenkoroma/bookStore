@@ -1,10 +1,8 @@
 import { FC, ChangeEvent, useState, KeyboardEvent } from 'react';
-import { useDispatch } from 'react-redux';
 import { Button } from 'components/button';
 import Input from 'components/input';
 import Select from 'components/select';
 import { kindSortingName } from 'assets/constants';
-import { getBooks, getSortingBooks } from 'store/reducer';
 import { getSearchingBooks } from 'store/reducer/getSearchBooks';
 import { useAppDispatch } from 'hooks';
 import Items from './items';
@@ -14,7 +12,7 @@ const Main: FC = (): JSX.Element => {
   const [inputString, setInputString] = useState<string>('');
   const [sortingField, setSortingField] = useState<string>('');
   const dispatch = useAppDispatch();
- 
+
   const triggerLoadData = (): void => {
     dispatch(getSearchingBooks(inputString));
   };
@@ -35,7 +33,7 @@ const Main: FC = (): JSX.Element => {
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
     const queryParams = `${inputString}&orderBy=${e.target.value}`;
-    dispatch(getSortingBooks(queryParams));
+    dispatch(getSearchingBooks(queryParams));
   };
 
   return (
