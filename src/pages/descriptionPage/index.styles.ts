@@ -35,7 +35,7 @@ export const Image = styled.img`
 
 export const Description = styled.div`
 	width: 100%;
-	max-width: 700px;
+	max-width: 820px;
 
 	@media (max-width: 560px) {
 		width: 100%;
@@ -45,7 +45,7 @@ export const Description = styled.div`
 
 export const Page = styled.p`
 	width: 100%;
-	max-width: 300px;
+	max-width: 800px;
   
 	@media (max-width: 560px) {
 		width: 100%;
@@ -56,5 +56,8 @@ export const Page = styled.p`
 
 export const Text = styled.span`
 	font-family: var(--system-font-family);
-	font-weight: 900;
+	font-weight: 600;
+`;
+
+export const TextDescription = styled.span`
 `;

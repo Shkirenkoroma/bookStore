@@ -29,7 +29,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const [filteredArray, setFilteredArray] = useState<any>([]);
   const [visible, setVisible] = useState<number>(30);
   const dispatch = useAppDispatch();
-  const dataFromState = useAppSelector(state => state.books.books.items);
+  const dataFromState = useAppSelector(state => state?.books?.books?.items);
   const loading = useAppSelector(isLoading);
   console.log('filteredArray', filteredArray);
   console.log('dataFromState', dataFromState);
@@ -45,20 +45,25 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   }, [dataFromState]);
 
   useEffect(() => {
-    console.log('oops')
+    console.log('oops');
     //dispatch((selectSearchingBook(id)));
   }, [id]);
 
   useEffect(() => {
     if (sortingField === 'All') {
-      setFilteredArray(dataFromState);
-    } else setFilteredArray(sortingFunction());
+      if (!!dataFromState) setFilteredArray(dataFromState);
+    } else {
+      if (!!dataFromState) {
+        setFilteredArray(sortingFunction());
+        console.log('all inadad');
+      }
+    }
   }, [sortingField]);
 
   const sortingFunction = () => {
     return stateArray?.filter((element: IPropertiesMap) => {
       const sortingElement = element.volumeInfo.categories?.[0];
-      console.log('saf', sortingElement)
+      console.log('saf', sortingElement);
       const isHasMatches = sortingElement?.includes(sortingField);
       return isHasMatches;
     });
@@ -98,8 +103,9 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
               </Link>
             ))}
           </S.Content>
-          {!!filteredArray?.length && <Button onClick={showMoreItems} buttonName={'Show more'} />}
-         
+          {!!filteredArray?.length && (
+            <Button onClick={showMoreItems} buttonName={'Show more'} />
+          )}
         </>
       )}
     </S.Container>

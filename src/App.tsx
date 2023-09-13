@@ -1,8 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { HashRouter } from 'react-router-dom';
 import AppRouter from 'AppRouter';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { getSearchingBooks } from 'store/reducer/getSearchBooks';
+import { useAppSelector } from 'hooks';
 import * as S from '../src/App.styles';
 
 const App: FC = (): JSX.Element => {

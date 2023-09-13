@@ -20,6 +20,7 @@ export const Container = styled.div`
 export const Text = styled.span`
  font-family: var(--system-font-family);
 `;
+
 export const Counter = styled.span`
 	margin: 0 10px;
 	font-weight: 900;

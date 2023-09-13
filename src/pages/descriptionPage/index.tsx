@@ -43,19 +43,19 @@ const DescriptionPage = () => {
           <S.Description>
             <S.Page>
               <S.Text>Name:</S.Text>
-              <S.Text>{title}</S.Text>
+              <S.TextDescription>{title}</S.TextDescription>
             </S.Page>
             <S.Page>
               <S.Text>Categories: </S.Text>
-              <S.Text>{categories}</S.Text>
+              <S.TextDescription>{categories}</S.TextDescription>
             </S.Page>
             <S.Page>
               <S.Text>Authors:</S.Text>
-              <S.Text>{authors}</S.Text>
+              <S.TextDescription>{authors}</S.TextDescription>
             </S.Page>
             <S.Page>
               <S.Text>Description:</S.Text>
-              <S.Text>{description}</S.Text>
+              <S.TextDescription>{description}</S.TextDescription>
             </S.Page>
           </S.Description>
         </>
