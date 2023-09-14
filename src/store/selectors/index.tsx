@@ -1,5 +1,3 @@
-
-
 export const urlBookId = (state: any) => state.books.book.id;
 
 export const isLoading = (state: any) => state.books?.loading;
@@ -11,4 +9,4 @@ export const state = (state: any) =>
   state.books.book.volumeInfo ?? [];
   
 export const imageLinks = (state: any) =>
-  state.books.book?.volumeInfo?.imageLinks?.smallThumbnail ?? '';
+  state.books.book?.volumeInfo?.imageLinks?.smallThumbnail || ' ';

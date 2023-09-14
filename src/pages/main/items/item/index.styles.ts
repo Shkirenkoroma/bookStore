@@ -28,7 +28,7 @@ export const Image = styled.img`
 export const Text = styled.span`
 	display: -webkit-box;
 	display: -moz-box;
-	font-size: 12px;
+	font-size: 18px;
 	font-family: 'Monotype Corsiva';
 	text-overflow: ellipsis;
 	-moz-box-orient: vertical;
@@ -41,5 +41,6 @@ export const Text = styled.span`
 `;
 
 export const TextUpperCase = styled.span`
-	font-weight: 700;
+  font-weight: 700;
+  font-size:18px;
 `;

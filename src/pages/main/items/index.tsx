@@ -72,7 +72,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
     <S.Container>
       {loading ? (
         <MagnifyingGlass
-          visible={true}
+          visible
           height="110"
           width="110"
           ariaLabel="MagnifyingGlass-loading"
@@ -98,7 +98,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
             ))}
           </S.Content>
           {!!filteredArray?.length && (
-            <Button onClick={showMoreItems} buttonName={'Show more'} />
+            <Button onClick={showMoreItems} buttonName="Show more" />
           )}
         </>
       )}

@@ -5,7 +5,7 @@ import { selectSearchingBook } from './selectSearchingBook';
 interface IState {
   books: any;
   book: any;
-  filteredbook:any,
+  filteredbook: any;
   loading: boolean;
   error: string;
   id: number;
@@ -16,7 +16,7 @@ interface IState {
 const initialState: IState = {
   books: [],
   book: {},
-  filteredbook:[],
+  filteredbook: [],
   loading: false,
   error: '',
   id: 0,
@@ -27,13 +27,17 @@ const initialState: IState = {
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    getSearchingString: (state: IState, action: PayloadAction<string>) => {
+      state.searchParams = action.payload;
+    },
+  },
   extraReducers: {
     [getSearchingBooks.fulfilled.type]: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = '';
       state.books = action.payload;
-      state.filteredbook = action.payload
+      state.filteredbook = action.payload;
     },
     [getSearchingBooks.pending.type]: state => {
       state.loading = true;
@@ -42,7 +46,10 @@ export const booksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    [selectSearchingBook.fulfilled.type]: (state, action: PayloadAction<any>) => {
+    [selectSearchingBook.fulfilled.type]: (
+      state,
+      action: PayloadAction<any>,
+    ) => {
       state.loading = false;
       state.error = '';
       state.book = action.payload;
@@ -50,12 +57,14 @@ export const booksSlice = createSlice({
     [selectSearchingBook.pending.type]: state => {
       state.loading = true;
     },
-    [selectSearchingBook.rejected.type]: (state, action: PayloadAction<any>) => {
+    [selectSearchingBook.rejected.type]: (
+      state,
+      action: PayloadAction<any>,
+    ) => {
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
-
+export const { getSearchingString } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;
-

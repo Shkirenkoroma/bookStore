@@ -5,6 +5,7 @@ import Select from 'components/select';
 import { kindSortingName } from 'assets/constants';
 import { getSearchingBooks } from 'store/reducer/getSearchBooks';
 import { useAppDispatch } from 'hooks';
+import { getSearchingString } from 'store/reducer';
 import Items from './items';
 import * as S from './index.styles';
 
@@ -15,6 +16,7 @@ const Main: FC = (): JSX.Element => {
 
   const triggerLoadData = (): void => {
     dispatch(getSearchingBooks(inputString));
+    dispatch(getSearchingString(inputString))
   };
 
   const triggerSortByKind = (name: string): void => {
@@ -28,6 +30,7 @@ const Main: FC = (): JSX.Element => {
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       dispatch(getSearchingBooks(inputString));
+      dispatch(getSearchingString(inputString))
     }
   };
 
