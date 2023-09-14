@@ -13,11 +13,11 @@ interface IResponseData {
   data:IData[]
 }
 
-export const selectSearchingBook = createAsyncThunk<IResponseData, number>(
+export const selectSearchingBook = createAsyncThunk<IResponseData, number | string>(
   'user/fetchByID',
-  async (id) => {
+  async (queryParams) => {
     const response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes/${id}`,
+      `https://www.googleapis.com/books/v1/volumes/${queryParams}`,
     );
     return response.data;
   },

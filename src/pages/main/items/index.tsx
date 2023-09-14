@@ -30,9 +30,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const [visible, setVisible] = useState<number>(30);
   const dispatch = useAppDispatch();
   const dataFromState = useAppSelector(state => state?.books?.books?.items);
+  const dataFromStateFiltered = useAppSelector(state => state?.books?.filteredbook?.items);
   const loading = useAppSelector(isLoading);
-  console.log('filteredArray', filteredArray);
-  console.log('dataFromState', dataFromState);
   const id = useAppSelector(urlBookId);
 
   const showMoreItems = () => {
@@ -41,13 +40,11 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
 
   useEffect(() => {
     setStateArray(dataFromState);
-    setFilteredArray(dataFromState);
+    setFilteredArray(dataFromStateFiltered);
   }, [dataFromState]);
 
   useEffect(() => {
-    console.log('oops');
-    //dispatch((selectSearchingBook(id)));
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     if (sortingField === 'All') {
@@ -55,7 +52,6 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
     } else {
       if (!!dataFromState) {
         setFilteredArray(sortingFunction());
-        console.log('all inadad');
       }
     }
   }, [sortingField]);
@@ -63,15 +59,13 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const sortingFunction = () => {
     return stateArray?.filter((element: IPropertiesMap) => {
       const sortingElement = element.volumeInfo.categories?.[0];
-      console.log('saf', sortingElement);
       const isHasMatches = sortingElement?.includes(sortingField);
       return isHasMatches;
     });
   };
 
-  const handleIdBook = (id: number): void => {
-    console.log('id in function', id);
-    dispatch(selectSearchingBook(id));
+  const handleIdBook = (queryIdParams: number): void => {
+    dispatch(selectSearchingBook(queryIdParams));
   };
 
   return (
@@ -90,7 +84,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
       ) : (
         <>
           <S.Text>
-            Found<S.Counter>{filteredArray.length}</S.Counter>
+            Found<S.Counter>{filteredArray?.length || '0'}</S.Counter>
             <S.Text>books</S.Text>
           </S.Text>
           <S.Content>

@@ -32,8 +32,8 @@ const Main: FC = (): JSX.Element => {
   };
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-    const queryParams = `${inputString}&orderBy=${e.target.value}`;
-    dispatch(getSearchingBooks(queryParams));
+    const querySortingParams = `${inputString}&orderBy=${e.target.value}`;
+    dispatch(getSearchingBooks(querySortingParams));
   };
 
   return (

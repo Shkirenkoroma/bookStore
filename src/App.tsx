@@ -6,7 +6,6 @@ import * as S from '../src/App.styles';
 
 const App: FC = (): JSX.Element => {
 const loading = useAppSelector(state=>state.books.loading)
-console.log('load', loading)
 
   return (
     <HashRouter>

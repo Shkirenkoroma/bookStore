@@ -5,6 +5,7 @@ import { selectSearchingBook } from './selectSearchingBook';
 interface IState {
   books: any;
   book: any;
+  filteredbook:any,
   loading: boolean;
   error: string;
   id: number;
@@ -15,6 +16,7 @@ interface IState {
 const initialState: IState = {
   books: [],
   book: {},
+  filteredbook:[],
   loading: false,
   error: '',
   id: 0,
@@ -31,6 +33,7 @@ export const booksSlice = createSlice({
       state.loading = false;
       state.error = '';
       state.books = action.payload;
+      state.filteredbook = action.payload
     },
     [getSearchingBooks.pending.type]: state => {
       state.loading = true;
