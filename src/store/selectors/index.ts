@@ -1,4 +1,4 @@
-export const urlBookId = (state: any) => state.books.book.id;
+export const urlBookId = (state: any) => state.books.id;
 
 export const isLoading = (state: any) => state.books?.loading;
 

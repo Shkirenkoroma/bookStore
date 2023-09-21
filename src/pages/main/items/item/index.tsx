@@ -13,7 +13,7 @@ export interface IVolumeInfo {
 export interface IPropsItem {
   state: {
     kind: string;
-    id: number;
+    id: string;
     etag: string;
     selfLink: string;
     volumeInfo: IVolumeInfo;

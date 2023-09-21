@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getSearchingBooks } from './getSearchBooks';
-import { selectSearchingBook } from './selectSearchingBook';
+import { selectBook } from './selectBook';
 
 interface IState {
   books: any;
@@ -8,7 +8,7 @@ interface IState {
   filteredbook: any;
   loading: boolean;
   error: string;
-  id: number;
+  id: number | string;
   searchParams: any;
   queryParams: string;
 }
@@ -31,6 +31,9 @@ export const booksSlice = createSlice({
     getSearchingString: (state: IState, action: PayloadAction<string>) => {
       state.searchParams = action.payload;
     },
+    getSelectBookId:(state:IState, action:PayloadAction<string>) => {
+      state.id = action.payload;
+    },
   },
   extraReducers: {
     [getSearchingBooks.fulfilled.type]: (state, action: PayloadAction<any>) => {
@@ -46,18 +49,20 @@ export const booksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    [selectSearchingBook.fulfilled.type]: (
+    [selectBook.fulfilled.type]: (
       state,
       action: PayloadAction<any>,
     ) => {
+      console.log('action.payload', action.payload)
       state.loading = false;
       state.error = '';
       state.book = action.payload;
+      state.id = action.payload.id;
     },
-    [selectSearchingBook.pending.type]: state => {
+    [selectBook.pending.type]: state => {
       state.loading = true;
     },
-    [selectSearchingBook.rejected.type]: (
+    [selectBook.rejected.type]: (
       state,
       action: PayloadAction<any>,
     ) => {
@@ -66,5 +71,5 @@ export const booksSlice = createSlice({
     },
   },
 });
-export const { getSearchingString } = booksSlice.actions;
+export const { getSearchingString, getSelectBookId } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;

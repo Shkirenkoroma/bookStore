@@ -4,6 +4,7 @@ import Input from 'components/input';
 import Select from 'components/select';
 import { kindSortingName } from 'assets/constants';
 import { getSearchingBooks } from 'store/reducer/getSearchBooks';
+// import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
 import { useAppDispatch } from 'hooks';
 import { getSearchingString } from 'store/reducer';
 import Items from './items';
@@ -36,7 +37,7 @@ const Main: FC = (): JSX.Element => {
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
     const querySortingParams = `${inputString}&orderBy=${e.target.value}`;
-    dispatch(getSearchingBooks(querySortingParams));
+    // dispatch(selectSearchingBook(querySortingParams));
   };
 
   return (

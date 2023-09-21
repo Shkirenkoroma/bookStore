@@ -4,13 +4,15 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
 import { isLoading, urlBookId } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
+import { selectBook } from 'store/reducer/selectBook';
+// import { getSelectBookId } from 'store/reducer';
+// import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
 import Item, { IVolumeInfo } from './item';
 import * as S from './index.styles';
 
 export interface IPropsItems {
   kind: string;
-  id: number;
+  id: string;
   etag: string;
   selfLink: string;
   volumeInfo: IVolumeInfo;
@@ -64,8 +66,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
     });
   };
 
-  const handleIdBook = (queryIdParams: number): void => {
-    dispatch(selectSearchingBook(queryIdParams));
+  const handleIdBook = (queryIdParams: string): void => {
+    dispatch(selectBook(queryIdParams));
   };
 
   return (

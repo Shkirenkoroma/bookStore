@@ -13,7 +13,7 @@ interface IResponseData {
   data:IData[]
 }
 
-export const selectSearchingBook = createAsyncThunk<IResponseData, number | string>(
+export const selectBook = createAsyncThunk<IResponseData, number | string>(
   'user/fetchByID',
   async (queryParams) => {
     const response = await axios.get(

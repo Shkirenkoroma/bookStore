@@ -17,6 +17,7 @@ const DescriptionPage = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
+    console.log('searchparams', searchParams)
     dispatch(getSearchingBooks(searchParams))
     navigate(-1);
   };
