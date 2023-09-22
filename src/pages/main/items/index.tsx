@@ -5,8 +5,6 @@ import { Button } from 'components/button';
 import { isLoading, urlBookId } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectBook } from 'store/reducer/selectBook';
-// import { getSelectBookId } from 'store/reducer';
-// import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
 import Item, { IVolumeInfo } from './item';
 import * as S from './index.styles';
 

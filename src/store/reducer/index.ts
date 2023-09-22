@@ -53,7 +53,6 @@ export const booksSlice = createSlice({
       state,
       action: PayloadAction<any>,
     ) => {
-      console.log('action.payload', action.payload)
       state.loading = false;
       state.error = '';
       state.book = action.payload;

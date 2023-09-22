@@ -10,3 +10,5 @@ export const state = (state: any) =>
   
 export const imageLinks = (state: any) =>
   state.books.book?.volumeInfo?.imageLinks?.smallThumbnail || ' ';
+
+  export const descriptionSearchParams = (state:any)  => state.books.searchParams;

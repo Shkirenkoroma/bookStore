@@ -3,7 +3,7 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getSearchingBooks } from 'store/reducer/getSearchBooks';
-import { bookData, imageLinks, isLoading } from 'store/selectors';
+import { bookData, descriptionSearchParams, imageLinks, isLoading } from 'store/selectors';
 import * as S from './index.styles';
 
 const DescriptionPage = () => {
@@ -13,11 +13,10 @@ const DescriptionPage = () => {
   } = useAppSelector(bookData);
   const dispatch = useAppDispatch()
   const label = useAppSelector(imageLinks);
-  const searchParams = useAppSelector(state => state.books.searchParams)
+  const searchParams = useAppSelector(descriptionSearchParams)
   const navigate = useNavigate();
 
   const goBack = () => {
-    console.log('searchparams', searchParams)
     dispatch(getSearchingBooks(searchParams))
     navigate(-1);
   };
