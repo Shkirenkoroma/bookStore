@@ -6,7 +6,6 @@ import { urlBookId } from 'store/selectors';
 
 const AppRouter = () => {
   const url = useAppSelector(urlBookId);
-  console.log('url', url)
 
   return (
     <Routes>
