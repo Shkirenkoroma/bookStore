@@ -18,9 +18,9 @@ export const Header = styled.div`
 	align-items: center;
 	margin: 50px 0 20px 0;
   
-  @media (max-width: 560px) {
-		min-height: 30px;
-		margin: 20px 10px 0 10px;
+    @media (max-width: 560px) {
+		  min-height: 30px;
+	  	margin: 20px 10px 0 10px;
 	}
 `;
 

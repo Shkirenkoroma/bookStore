@@ -6,7 +6,8 @@ export const Container = styled.div`
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 15px;
-	min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
+  
   	a {
 	  	display: flex;
 		  flex-wrap: wrap;

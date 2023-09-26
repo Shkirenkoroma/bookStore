@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { getSearchingBooks } from 'store/reducer/getSearchBooks';
-import { bookData, descriptionSearchParams, imageLinks, isLoading } from 'store/selectors';
+import { getBooks } from 'store/reducer/getBooks';
+import { bookData, searchingQueryParams, imageLinks, isLoading } from 'store/selectors';
 import * as S from './index.styles';
 
 const DescriptionPage = () => {
@@ -13,11 +13,11 @@ const DescriptionPage = () => {
   } = useAppSelector(bookData);
   const dispatch = useAppDispatch();
   const titlePoster = useAppSelector(imageLinks);
-  const searchParams = useAppSelector(descriptionSearchParams);
+  const searchParams = useAppSelector(searchingQueryParams);
   const navigate = useNavigate();
 
   const goBack = () => {
-    dispatch(getSearchingBooks(searchParams));
+    dispatch(getBooks(searchParams));
     navigate(-1);
   };
 

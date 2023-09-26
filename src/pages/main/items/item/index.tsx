@@ -26,7 +26,7 @@ export const Item: FC<IPropsItem> = ({ dataBook, handleClick }): JSX.Element => 
 
   return (
     <S.Container onClick={handleClick}>
-      <S.Image src={imageLinks.smallThumbnail} alt="label of book" />
+      <S.Image src={imageLinks?.smallThumbnail} alt="main poster of book" />
       <S.Text>
         <S.TextUpperCase>Наименование:</S.TextUpperCase>
         {title || unknown}

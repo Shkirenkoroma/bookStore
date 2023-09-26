@@ -17,7 +17,7 @@ export interface IPropsItems {
 }
 
 export interface IStateItemsProps {
-  sortingField: string;
+  selectCategory: string;
   selectOrder: string;
 }
 
@@ -25,39 +25,39 @@ export interface IPropertiesMap {
   volumeInfo: IVolumeInfo;
 }
 
-const Items: FC<IStateItemsProps> = ({ sortingField, selectOrder }): JSX.Element => {
-  const [stateArray, setStateArray] = useState<any>([]);
-  const [filteredArray, setFilteredArray] = useState<any>([]);
+const Items: FC<IStateItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => {
+  const [arrayDataBooks, setArrayDataBooks] = useState<any>([]);
+  const [filteredArrayDataBooks, setFilteredArrayDataBooks] = useState<any>([]);
   const [visible, setVisible] = useState<number>(30);
   const dispatch = useAppDispatch();
-  const dataFromState = useAppSelector(state => state?.books?.books?.items);
-  const dataFromStateFiltered = useAppSelector(state => state?.books?.filteredbook?.items);
-  const loading = useAppSelector(isLoading);
+  const collectionBooks = useAppSelector(state => state?.books?.books?.items);
+  const filteredCollectionBooks = useAppSelector(state => state?.books?.filteredbook?.items);
+  const loadingCollectionBooks = useAppSelector(isLoading);
 
   const showMoreItems = () => {
     setVisible(prevValue => prevValue + 30);
   };
 
   useEffect(() => {
-    setStateArray(dataFromState);
-    setFilteredArray(dataFromStateFiltered);
-  }, [dataFromState, selectOrder]);
+    setArrayDataBooks(collectionBooks);
+    setFilteredArrayDataBooks(filteredCollectionBooks);
+  }, [collectionBooks, selectOrder]);
 
 
   useEffect(() => {
-    if (sortingField === 'All') {
-      if (!!dataFromState) setFilteredArray(dataFromState);
+    if (selectCategory === 'All') {
+      if (!!collectionBooks) setFilteredArrayDataBooks(collectionBooks);
     } else {
-      if (!!dataFromState) {
-        setFilteredArray(sortingFunction());
+      if (!!collectionBooks) {
+        setFilteredArrayDataBooks(filterFunction());
       }
     }
-  }, [sortingField]);
+  }, [selectCategory]);
 
-  const sortingFunction = () => {
-    return stateArray?.filter((element: IPropertiesMap) => {
+  const filterFunction = () => {
+    return arrayDataBooks?.filter((element: IPropertiesMap) => {
       const sortingElement = element.volumeInfo.categories?.[0];
-      const isHasMatches = sortingElement?.includes(sortingField);
+      const isHasMatches = sortingElement?.includes(selectCategory);
       return isHasMatches;
     });
   };
@@ -68,7 +68,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField, selectOrder }): JSX.Element
 
   return (
     <S.Container>
-      {loading ? (
+      {loadingCollectionBooks ? (
         <MagnifyingGlass
           visible
           height="110"
@@ -82,11 +82,11 @@ const Items: FC<IStateItemsProps> = ({ sortingField, selectOrder }): JSX.Element
       ) : (
         <>
           <S.Text>
-            Found<S.Counter>{filteredArray?.length || '0'}</S.Counter>
+            Found<S.Counter>{filteredArrayDataBooks?.length || '0'}</S.Counter>
             <S.Text>books</S.Text>
           </S.Text>
           <S.Content>
-            {filteredArray?.slice(0, visible).map((element: IPropsItems) => (
+            {filteredArrayDataBooks?.slice(0, visible).map((element: IPropsItems) => (
               <Link to={`${element.id}`} key={element.id}>
                 <Item
                   dataBook={element}
@@ -95,7 +95,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField, selectOrder }): JSX.Element
               </Link>
             ))}
           </S.Content>
-          {!!filteredArray?.length && (
+          {!!filteredArrayDataBooks?.length && (
             <Button onClick={showMoreItems} buttonName="Show more" />
           )}
         </>
