@@ -12,16 +12,16 @@ export const Button = styled.button`
 	background-size: 400%;
 	background-color: transparent;
   
-	@media (max-width: 560px) {
-		min-height: 30px;
-		padding: 1px 1px;
+	  @media (max-width: 560px) {
+		  min-height: 30px;
+		  padding: 1px 1px;
 	}
   
-	:hover {
-		cursor: pointer;
-		border: 1px solid transparent;
-		background-position: 10%;
-		transition: all 500ms;
+	  :hover {
+	  	cursor: pointer;
+		  border: 1px solid transparent;
+		  background-position: 10%;
+	  	transition: all 500ms;
 	}
 `;
 

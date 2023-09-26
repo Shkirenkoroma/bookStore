@@ -1,4 +1,4 @@
-export const kindSortingName = [
+export const kindCategory = [
   { id: 1, name: 'All', className: 'sorting' },
   { id: 2, name: 'Art', className: 'sorting' },
   { id: 3, name: 'Biography', className: 'sorting' },

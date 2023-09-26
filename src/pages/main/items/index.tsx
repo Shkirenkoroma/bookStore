@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
-import { isLoading, urlBookId } from 'store/selectors';
+import { isLoading } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectBook } from 'store/reducer/selectBook';
 import Item, { IVolumeInfo } from './item';
@@ -18,13 +18,14 @@ export interface IPropsItems {
 
 export interface IStateItemsProps {
   sortingField: string;
+  selectOrder: string;
 }
 
 export interface IPropertiesMap {
   volumeInfo: IVolumeInfo;
 }
 
-const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
+const Items: FC<IStateItemsProps> = ({ sortingField, selectOrder }): JSX.Element => {
   const [stateArray, setStateArray] = useState<any>([]);
   const [filteredArray, setFilteredArray] = useState<any>([]);
   const [visible, setVisible] = useState<number>(30);
@@ -32,7 +33,6 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   const dataFromState = useAppSelector(state => state?.books?.books?.items);
   const dataFromStateFiltered = useAppSelector(state => state?.books?.filteredbook?.items);
   const loading = useAppSelector(isLoading);
-  const id = useAppSelector(urlBookId);
 
   const showMoreItems = () => {
     setVisible(prevValue => prevValue + 30);
@@ -41,10 +41,8 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
   useEffect(() => {
     setStateArray(dataFromState);
     setFilteredArray(dataFromStateFiltered);
-  }, [dataFromState]);
+  }, [dataFromState, selectOrder]);
 
-  useEffect(() => {
-  }, []);
 
   useEffect(() => {
     if (sortingField === 'All') {
@@ -91,7 +89,7 @@ const Items: FC<IStateItemsProps> = ({ sortingField }): JSX.Element => {
             {filteredArray?.slice(0, visible).map((element: IPropsItems) => (
               <Link to={`${element.id}`} key={element.id}>
                 <Item
-                  state={element}
+                  dataBook={element}
                   handleClick={() => handleIdBook(element.id)}
                 />
               </Link>

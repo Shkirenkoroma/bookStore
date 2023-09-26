@@ -11,7 +11,7 @@ export interface IVolumeInfo {
 }
 
 export interface IPropsItem {
-  state: {
+  dataBook: {
     kind: string;
     id: string;
     etag: string;
@@ -21,22 +21,19 @@ export interface IPropsItem {
   handleClick: () => void;
 }
 
-export const Item: FC<IPropsItem> = ({ state, handleClick }): JSX.Element => {
-  const label = state.volumeInfo.imageLinks?.smallThumbnail;
-  const name = state.volumeInfo.title;
-  const category = state.volumeInfo.categories?.[0];
-  const { authors } = state.volumeInfo;
+export const Item: FC<IPropsItem> = ({ dataBook, handleClick }): JSX.Element => {
+  const { authors, imageLinks, title, categories} = dataBook.volumeInfo;
 
   return (
     <S.Container onClick={handleClick}>
-      <S.Image src={label} alt="label of book" />
+      <S.Image src={imageLinks.smallThumbnail} alt="label of book" />
       <S.Text>
         <S.TextUpperCase>Наименование:</S.TextUpperCase>
-        {name || unknown}
+        {title || unknown}
       </S.Text>
       <S.Text>
         <S.TextUpperCase>Категория:</S.TextUpperCase>
-        {category || unknown}
+        {categories || unknown}
       </S.Text>
       <S.Text>
         <S.TextUpperCase>Автор:</S.TextUpperCase>

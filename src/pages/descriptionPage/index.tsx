@@ -11,13 +11,13 @@ const DescriptionPage = () => {
   const {
     title, categories, authors, description,
   } = useAppSelector(bookData);
-  const dispatch = useAppDispatch()
-  const label = useAppSelector(imageLinks);
-  const searchParams = useAppSelector(descriptionSearchParams)
+  const dispatch = useAppDispatch();
+  const titlePoster = useAppSelector(imageLinks);
+  const searchParams = useAppSelector(descriptionSearchParams);
   const navigate = useNavigate();
 
   const goBack = () => {
-    dispatch(getSearchingBooks(searchParams))
+    dispatch(getSearchingBooks(searchParams));
     navigate(-1);
   };
 
@@ -42,7 +42,7 @@ const DescriptionPage = () => {
             onClick={goBack}
           />
           <S.Label>
-            <S.Image src={label} alt="label of book" /> 
+            <S.Image src={titlePoster} alt="label of book" /> 
           </S.Label>
           <S.Description>
             <S.Page>

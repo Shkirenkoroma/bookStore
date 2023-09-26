@@ -9,7 +9,7 @@ export const Input = styled.input`
 	font-size: 20px;
 	outline: none;
 
-	::placeholder {
-		font-size: 20px;
+	  ::placeholder {
+	  	font-size: 20px;
 	}
 `;

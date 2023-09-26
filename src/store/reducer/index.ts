@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getSearchingBooks } from './getSearchBooks';
 import { selectBook } from './selectBook';
+import { sortBook } from './sortBooks';
 
 interface IState {
   books: any;
@@ -68,7 +69,20 @@ export const booksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    [sortBook.fulfilled.type]:(state, action:PayloadAction<any>) => {
+      state.loading = false;
+      state.books = action.payload;
+      state.filteredbook = action.payload
+    },
+    [sortBook.pending.type]:state => {
+      state.loading = true
+    },
+    [sortBook.rejected.type]:(state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
+
 export const { getSearchingString, getSelectBookId } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;

@@ -9,7 +9,7 @@ export const Select = styled.select`
   font-family: var(--system-font-family);
 	font-weight: 700;
   
-	&:hover {
-		cursor: pointer;
+  	&:hover {
+	  	cursor: pointer;
 	}
 `;

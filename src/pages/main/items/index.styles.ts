@@ -7,18 +7,18 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	gap: 15px;
 	min-height: calc(100vh - 200px);
-	a {
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
-		max-width: 200px;
-		text-decoration: none;
-		color: var(--black);
+  	a {
+	  	display: flex;
+		  flex-wrap: wrap;
+	  	width: 100%;
+	  	max-width: 200px;
+	  	text-decoration: none;
+		  color: var(--black);
 	}
 `;
 
 export const Text = styled.span`
- font-family: var(--system-font-family);
+  font-family: var(--system-font-family);
 `;
 
 export const Counter = styled.span`

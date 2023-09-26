@@ -17,7 +17,8 @@ export const Header = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin: 50px 0 20px 0;
-	@media (max-width: 560px) {
+  
+  @media (max-width: 560px) {
 		min-height: 30px;
 		margin: 20px 10px 0 10px;
 	}
@@ -35,12 +36,13 @@ export const ButtonGroup = styled.div`
 	width: 100%;
 	max-width: 605px;
 	margin-top: 40px;
-	@media (max-width: 560px) {
-		display: grid;
-		align-content: center;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: 30% 30% 30%;
-		gap: 20px;
-		margin-bottom: 20px;
+  
+    @media (max-width: 560px) {
+		  display: grid;
+		  align-content: center;
+		  grid-template-columns: 1fr 1fr 1fr;
+		  grid-template-rows: 30% 30% 30%;
+		  gap: 20px;
+		  margin-bottom: 20px;
 	}
 `;

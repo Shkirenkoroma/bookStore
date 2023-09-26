@@ -2,18 +2,21 @@ import { FC, ChangeEvent, useState, KeyboardEvent } from 'react';
 import { Button } from 'components/button';
 import Input from 'components/input';
 import Select from 'components/select';
-import { kindSortingName } from 'assets/constants';
+import { kindCategory } from 'assets/constants';
 import { getSearchingBooks } from 'store/reducer/getSearchBooks';
-// import { selectSearchingBook } from 'store/reducer/selectSearchingBook';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { sortBook } from 'store/reducer/sortBooks';
 import { getSearchingString } from 'store/reducer';
+import { descriptionSearchParams } from 'store/selectors'
 import Items from './items';
 import * as S from './index.styles';
 
 const Main: FC = (): JSX.Element => {
   const [inputString, setInputString] = useState<string>('');
   const [sortingField, setSortingField] = useState<string>('');
+  const [selectOrder, setSelectOrder] = useState<string>('');
   const dispatch = useAppDispatch();
+  const searchingParams = useAppSelector(descriptionSearchParams)
 
   const triggerLoadData = (): void => {
     dispatch(getSearchingBooks(inputString));
@@ -36,8 +39,9 @@ const Main: FC = (): JSX.Element => {
   };
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-    const querySortingParams = `${inputString}&orderBy=${e.target.value}`;
-    // dispatch(selectSearchingBook(querySortingParams));
+    setSelectOrder(e.target.value)
+    const querySortingParams = `${searchingParams}&orderBy=${e.target.value}`;
+    dispatch(sortBook(querySortingParams));
   };
 
   return (
@@ -48,7 +52,7 @@ const Main: FC = (): JSX.Element => {
           <Button onClick={triggerLoadData} buttonName={'Search'} />
         </S.HeaderMain>
         <S.ButtonGroup>
-          {kindSortingName.map(({ className, name, id }) => (
+          {kindCategory.map(({ className, name, id }) => (
             <Button
               key={id}
               className={className}
@@ -59,7 +63,7 @@ const Main: FC = (): JSX.Element => {
         </S.ButtonGroup>
         <Select onChange={handleChangeSelect} />
       </S.Header>
-      <Items  sortingField={sortingField} />
+      <Items  sortingField={sortingField} selectOrder={selectOrder} />
     </S.Main>
   );
 };

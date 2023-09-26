@@ -10,10 +10,10 @@ export const Container = styled.div`
 	border-radius: 20px;
 	background: linear-gradient(#b98d60, #474649);
 
-	@media (max-width: 560px) {
-		width: 100%;
-		max-width: 500px;
-		min-height: 400px;
+	  @media (max-width: 560px) {
+		  width: 100%;
+	  	max-width: 500px;
+		  min-height: 400px;
 	}
 `;
 
@@ -26,10 +26,10 @@ export const Image = styled.img`
 	max-width: 700px;
 	height: 500px;
 
-	@media (max-width: 560px) {
-		width: 100%;
-		max-width: 100px;
-		height: 180px;
+	  @media (max-width: 560px) {
+	  	width: 100%;
+		  max-width: 100px;
+	  	height: 180px;
 	}
 `;
 
@@ -37,9 +37,9 @@ export const Description = styled.div`
 	width: 100%;
 	max-width: 820px;
 
-	@media (max-width: 560px) {
-		width: 100%;
-		max-width: 300px;
+  	@media (max-width: 560px) {
+	  	width: 100%;
+	  	max-width: 300px;
 	}
 `;
 
@@ -47,10 +47,10 @@ export const Page = styled.p`
 	width: 100%;
 	max-width: 800px;
   
-	@media (max-width: 560px) {
-		width: 100%;
-		max-width: 100px;
-		font-size: 10px;
+  	@media (max-width: 560px) {
+	  	width: 100%;
+		  max-width: 100px;
+		  font-size: 10px;
 	}
 `;
 

@@ -12,10 +12,10 @@ export const Container = styled.div`
 	border: 1px solid transparent;
 	border-radius: 15px;
   
-	&:hover {
-		cursor: pointer;
-		background-color: #ac9d8c;
-		transition: all 700ms;
+	  &:hover {
+	  	cursor: pointer;
+	  	background-color: #ac9d8c;
+	  	transition: all 700ms;
 	}
 `;
 
