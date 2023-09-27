@@ -8,4 +8,6 @@ export const kindCategory = [
   { id: 7, name: 'Poetry', className: 'sorting' },
 ];
 
-export const unknown = 'Неизвестно'
+export const unknown = 'Неизвестно';
+
+export const basicUrl = 'https://www.googleapis.com/books/v1/volumes';

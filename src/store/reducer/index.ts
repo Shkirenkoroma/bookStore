@@ -1,83 +1,82 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { BookItem } from 'pages/main/items';
 import { getBooks } from './getBooks';
 import { selectBook } from './selectBook';
 import { sortBooks } from './sortBooks';
 
-interface IState {
-  books: any;
+export interface DataState {
+  books: BookItem[];
   book: any;
-  filteredbook: any;
+  filteredbooks: BookItem[];
   loading: boolean;
   error: string;
-  id: number | string;
-  searchParams: any;
-  queryParams: string;
+  idBook: string;
+  searchParams: string;
 };
 
-const initialState: IState = {
+const initialState: DataState = {
   books: [],
   book: {},
-  filteredbook: [],
+  filteredbooks: [],
   loading: false,
   error: '',
-  id: 0,
+  idBook: '',
   searchParams: '',
-  queryParams: '',
 };
 
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    getSearchingString: (state: IState, action: PayloadAction<string>) => {
+    getSearchingString: (state: DataState, action: PayloadAction<string>) => {
       state.searchParams = action.payload;
     },
-    getSelectBookId:(state:IState, action:PayloadAction<string>) => {
-      state.id = action.payload;
+    getSelectBookId:(state: DataState, action:PayloadAction<string>) => {
+      state.idBook = action.payload;
     },
   },
   extraReducers: {
-    [getBooks.fulfilled.type]: (state, action: PayloadAction<any>) => {
+    [getBooks.fulfilled.type]: (state: DataState, action: PayloadAction<BookItem[]>) => {
       state.loading = false;
       state.error = '';
       state.books = action.payload;
-      state.filteredbook = action.payload;
+      state.filteredbooks = action.payload;
     },
     [getBooks.pending.type]: state => {
       state.loading = true;
     },
-    [getBooks.rejected.type]: (state, action: PayloadAction<any>) => {
+    [getBooks.rejected.type]: (state: DataState, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
     },
     [selectBook.fulfilled.type]: (
-      state,
-      action: PayloadAction<any>,
+      state: DataState,
+      action: PayloadAction<BookItem>,
     ) => {
       state.loading = false;
       state.error = '';
       state.book = action.payload;
-      state.id = action.payload.id;
+      state.idBook = action.payload.id;
     },
-    [selectBook.pending.type]: state => {
+    [selectBook.pending.type]: (state: DataState)=> {
       state.loading = true;
     },
     [selectBook.rejected.type]: (
-      state,
-      action: PayloadAction<any>,
+      state: DataState,
+      action: PayloadAction<string>,
     ) => {
       state.loading = false;
       state.error = action.payload;
     },
-    [sortBooks.fulfilled.type]:(state, action:PayloadAction<any>) => {
+    [sortBooks.fulfilled.type]:(state: DataState, action:PayloadAction<BookItem[]>) => {
       state.loading = false;
+      state.filteredbooks = action.payload
       state.books = action.payload;
-      state.filteredbook = action.payload
     },
-    [sortBooks.pending.type]:state => {
+    [sortBooks.pending.type]:(state: DataState) => {
       state.loading = true
     },
-    [sortBooks.rejected.type]:(state, action) => {
+    [sortBooks.rejected.type]:(state: DataState, action:PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
     },

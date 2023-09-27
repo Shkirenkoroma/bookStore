@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { unknown } from 'assets/constants';
+import { BookItem } from '..';
 import * as S from './index.styles';
 
-export interface IVolumeInfo {
+export interface DataBook {
   title: string;
   authors: string[];
   description: string;
@@ -11,13 +12,7 @@ export interface IVolumeInfo {
 }
 
 export interface IPropsItem {
-  dataBook: {
-    kind: string;
-    id: string;
-    etag: string;
-    selfLink: string;
-    volumeInfo: IVolumeInfo;
-  };
+  dataBook: BookItem,
   handleClick: () => void;
 }
 

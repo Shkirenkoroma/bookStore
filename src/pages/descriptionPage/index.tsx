@@ -3,16 +3,16 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getBooks } from 'store/reducer/getBooks';
-import { bookData, searchingQueryParams, imageLinks, isLoading } from 'store/selectors';
+import { dataBook, searchingQueryParams, imageSource, loadingDataCollectionBooks } from 'store/selectors';
 import * as S from './index.styles';
 
 const DescriptionPage = () => {
-  const loading = useAppSelector(isLoading);
+  const loading = useAppSelector(loadingDataCollectionBooks);
   const {
     title, categories, authors, description,
-  } = useAppSelector(bookData);
+  } = useAppSelector(dataBook);
   const dispatch = useAppDispatch();
-  const titlePoster = useAppSelector(imageLinks);
+  const titlePoster = useAppSelector(imageSource);
   const searchParams = useAppSelector(searchingQueryParams);
   const navigate = useNavigate();
 

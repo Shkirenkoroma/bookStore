@@ -2,37 +2,38 @@ import { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
-import { isLoading } from 'store/selectors';
+import { loadingDataCollectionBooks } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectBook } from 'store/reducer/selectBook';
-import Item, { IVolumeInfo } from './item';
+import Item, { DataBook } from './item';
 import * as S from './index.styles';
 
-export interface IPropsItems {
+export interface BookItem {
   kind: string;
   id: string;
   etag: string;
   selfLink: string;
-  volumeInfo: IVolumeInfo;
+  volumeInfo: DataBook;
 }
 
-export interface IStateItemsProps {
+export interface ItemsProps {
   selectCategory: string;
   selectOrder: string;
 }
 
-export interface IPropertiesMap {
-  volumeInfo: IVolumeInfo;
+export interface DataItemOfBooksCollection {
+  volumeInfo: DataBook;
 }
 
-const Items: FC<IStateItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => {
-  const [arrayDataBooks, setArrayDataBooks] = useState<any>([]);
-  const [filteredArrayDataBooks, setFilteredArrayDataBooks] = useState<any>([]);
+const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => {
+  const [arrayDataBooks, setArrayDataBooks] = useState<BookItem[]>([]);
+  const [filteredArrayDataBooks, setFilteredArrayDataBooks] = useState<BookItem[]>([]);
   const [visible, setVisible] = useState<number>(30);
   const dispatch = useAppDispatch();
-  const collectionBooks = useAppSelector(state => state?.books?.books?.items);
-  const filteredCollectionBooks = useAppSelector(state => state?.books?.filteredbook?.items);
-  const loadingCollectionBooks = useAppSelector(isLoading);
+  const collectionBooks = useAppSelector(state => state.books?.books);
+  const filteredCollectionBooks = useAppSelector(state => state.books?.filteredbooks);
+  console.log('filteredcoa', filteredCollectionBooks)
+  const loadingCollectionBooks = useAppSelector(loadingDataCollectionBooks);
 
   const showMoreItems = () => {
     setVisible(prevValue => prevValue + 30);
@@ -55,7 +56,7 @@ const Items: FC<IStateItemsProps> = ({ selectCategory, selectOrder }): JSX.Eleme
   }, [selectCategory]);
 
   const filterFunction = () => {
-    return arrayDataBooks?.filter((element: IPropertiesMap) => {
+    return arrayDataBooks?.filter((element: DataItemOfBooksCollection) => {
       const sortingElement = element.volumeInfo.categories?.[0];
       const isHasMatches = sortingElement?.includes(selectCategory);
       return isHasMatches;
@@ -86,7 +87,7 @@ const Items: FC<IStateItemsProps> = ({ selectCategory, selectOrder }): JSX.Eleme
             <S.Text>books</S.Text>
           </S.Text>
           <S.Content>
-            {filteredArrayDataBooks?.slice(0, visible).map((element: IPropsItems) => (
+            {filteredCollectionBooks?.slice(0, visible).map((element: BookItem) => (
               <Link to={`${element.id}`} key={element.id}>
                 <Item
                   dataBook={element}
@@ -95,7 +96,7 @@ const Items: FC<IStateItemsProps> = ({ selectCategory, selectOrder }): JSX.Eleme
               </Link>
             ))}
           </S.Content>
-          {!!filteredArrayDataBooks?.length && (
+          {filteredCollectionBooks?.length && (
             <Button onClick={showMoreItems} buttonName="Show more" />
           )}
         </>

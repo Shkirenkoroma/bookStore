@@ -18,12 +18,12 @@ const Main: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const searchingParams = useAppSelector(searchingQueryParams)
 
-  const triggerLoadData = (): void => {
+  const startLoadDataBooks = (): void => {
     dispatch(getBooks(searchingWord));
     dispatch(getSearchingString(searchingWord))
   };
 
-  const triggerSortByKind = (name: string): void => {
+  const selectKindCategory = (name: string): void => {
     setSelectCategory(name);
   };
 
@@ -39,8 +39,8 @@ const Main: FC = (): JSX.Element => {
   };
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-    setSelectOrder(e.target.value)
     const querySortingParams = `${searchingParams}&orderBy=${e.target.value}`;
+    setSelectOrder(e.target.value)
     dispatch(sortBooks(querySortingParams));
   };
 
@@ -49,21 +49,21 @@ const Main: FC = (): JSX.Element => {
       <S.Header>
         <S.HeaderMain>
           <Input onChange={handleChange} onKeyDown={handleKeyPress} />
-          <Button onClick={triggerLoadData} buttonName={'Search'} />
+          <Button onClick={startLoadDataBooks} buttonName={'Search'} />
         </S.HeaderMain>
         <S.ButtonGroup>
           {kindCategory.map(({ className, name, id }) => (
             <Button
               key={id}
               className={className}
-              onClick={() => triggerSortByKind(name)}
+              onClick={() => selectKindCategory(name)}
               buttonName={name}
             />
           ))}
         </S.ButtonGroup>
         <Select onChange={handleChangeSelect} />
       </S.Header>
-      <Items  selectCategory={selectCategory} selectOrder={selectOrder} />
+      <Items selectCategory={selectCategory} selectOrder={selectOrder} />
     </S.Main>
   );
 };

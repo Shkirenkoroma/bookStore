@@ -1,23 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { basicUrl } from 'assets/constants';
 import axios from 'axios';
+import { BookItem } from 'pages/main/items';
 
-interface IData {
-  kind: string;
-  id: number;
-  etag: string;
-  selfLink: string;
-  volumeInfo: any;
-}
+export interface ResponseData {
+  data:BookItem[]
+};
 
-interface IResponseData {
-  data:IData[]
-}
-
-export const getBooks = createAsyncThunk<IResponseData, string>(
+export const getBooks = createAsyncThunk<ResponseData, string>(
   'user/getBooks',
   async (searchingWord) => {
     const response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchingWord}&maxResults=40`,
+      `${basicUrl}?q=${searchingWord}&maxResults=40`,
     );
     return response.data;
   },
