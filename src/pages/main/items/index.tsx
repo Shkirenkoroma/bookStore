@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { Button } from 'components/button';
-import { loadingDataCollectionBooks } from 'store/selectors';
+import { collectionDataBooks, loadingDataCollectionBooks } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectBook } from 'store/reducer/selectBook';
 import Item, { DataBook } from './item';
@@ -29,11 +29,10 @@ const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => 
   const [arrayDataBooks, setArrayDataBooks] = useState<BookItem[]>([]);
   const [filteredArrayDataBooks, setFilteredArrayDataBooks] = useState<BookItem[]>([]);
   const [visible, setVisible] = useState<number>(30);
-  const dispatch = useAppDispatch();
-  const collectionBooks = useAppSelector(state => state.books?.books);
-  const filteredCollectionBooks = useAppSelector(state => state.books?.filteredbooks);
-  console.log('filteredcoa', filteredCollectionBooks)
+  const collectionBooks = useAppSelector(collectionDataBooks);
+  const filteredCollectionBooks = useAppSelector(collectionDataBooks);
   const loadingCollectionBooks = useAppSelector(loadingDataCollectionBooks);
+  const dispatch = useAppDispatch();
 
   const showMoreItems = () => {
     setVisible(prevValue => prevValue + 30);
@@ -87,7 +86,7 @@ const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => 
             <S.Text>books</S.Text>
           </S.Text>
           <S.Content>
-            {filteredCollectionBooks?.slice(0, visible).map((element: BookItem) => (
+            {filteredArrayDataBooks?.slice(0, visible).map((element: BookItem) => (
               <Link to={`${element.id}`} key={element.id}>
                 <Item
                   dataBook={element}
@@ -96,7 +95,7 @@ const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => 
               </Link>
             ))}
           </S.Content>
-          {filteredCollectionBooks?.length && (
+          {!!filteredCollectionBooks?.length && (
             <Button onClick={showMoreItems} buttonName="Show more" />
           )}
         </>

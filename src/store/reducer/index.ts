@@ -6,7 +6,7 @@ import { sortBooks } from './sortBooks';
 
 export interface DataState {
   books: BookItem[];
-  book: any;
+  book: BookItem;
   filteredbooks: BookItem[];
   loading: boolean;
   error: string;
@@ -16,6 +16,7 @@ export interface DataState {
 
 const initialState: DataState = {
   books: [],
+  //@ts-ignore
   book: {},
   filteredbooks: [],
   loading: false,
