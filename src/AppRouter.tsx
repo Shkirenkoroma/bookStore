@@ -6,10 +6,11 @@ import Main from 'pages/main';
 
 const AppRouter = () => {
   const url = useAppSelector(bookId);
+  
 
   return (
     <Routes>
-      <Route path="/*" element={<Main />} />
+      <Route path="/" element={<Main />} />
       <Route path={`${url}`} element={<DescriptionPage />} />
     </Routes>
   );

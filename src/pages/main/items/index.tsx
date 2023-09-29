@@ -25,7 +25,7 @@ export interface DataItemOfBooksCollection {
   volumeInfo: DataBook;
 }
 
-const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => {
+const Books: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => {
   const [arrayDataBooks, setArrayDataBooks] = useState<BookItem[]>([]);
   const [filteredArrayDataBooks, setFilteredArrayDataBooks] = useState<BookItem[]>([]);
   const [visible, setVisible] = useState<number>(30);
@@ -42,7 +42,6 @@ const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => 
     setArrayDataBooks(collectionBooks);
     setFilteredArrayDataBooks(filteredCollectionBooks);
   }, [collectionBooks, selectOrder]);
-
 
   useEffect(() => {
     if (selectCategory === 'All') {
@@ -104,4 +103,4 @@ const Items: FC<ItemsProps> = ({ selectCategory, selectOrder }): JSX.Element => 
   );
 };
 
-export default Items;
+export default Books;

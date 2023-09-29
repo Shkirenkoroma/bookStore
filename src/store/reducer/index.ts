@@ -38,10 +38,10 @@ export const booksSlice = createSlice({
   },
   extraReducers: {
     [getBooks.fulfilled.type]: (state: DataState, action: PayloadAction<BookItem[]>) => {
-      state.loading = false;
       state.error = '';
       state.books = action.payload;
       state.filteredbooks = action.payload;
+      state.loading = false;
     },
     [getBooks.pending.type]: state => {
       state.loading = true;
